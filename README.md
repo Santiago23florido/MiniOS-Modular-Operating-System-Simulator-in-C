@@ -1,50 +1,58 @@
-# MiniOS: A Modular Operating System Simulator in C
+MiniOS: A Modular Operating System Simulator in C
 
-## Overview
-**MiniOS** is a modular simulator written in C that integrates fundamental concepts of operating systems into a cohesive and tangible project.  
-It is designed as a learning tool to study and demonstrate topics such as memory management, file systems, threading, protection mechanisms, and inter-process communication.
+💡 Overview
 
-Each module corresponds to a key concept explored throughout an undergraduate Operating Systems course, combined to form a small yet functional simulation of how an operating system operates internally.
+MiniOS is a modular simulator written in C that integrates fundamental concepts of operating systems into a cohesive and tangible project. It is designed as a hands-on learning tool to study and demonstrate core OS topics such as memory management, file systems, threading, protection mechanisms, and inter-process communication.
 
-## Features
-- **File System Module (ROMFS Parser)**  
-  Implements parsing and reading of a ROMFS-like filesystem image to simulate mounting and file exploration.
-  
-- **Memory Manager (Custom Allocator)**  
-  Provides a simple implementation of `memalloc` and `memfree`, using a linked-list allocator with coalescence to manage heap memory.
+Each module corresponds to a key concept explored in an undergraduate Operating Systems course, combining to form a small yet functional simulation of how a kernel operates internally.
 
-- **Cooperative Thread Scheduler**  
-  Simulates user-level cooperative threads using manual context switching, mimicking coroutine behavior and thread scheduling.
+✨ Features
 
-- **Memory Protection and Signal Handling**  
-  Uses `mprotect` and POSIX signals to emulate isolation and error recovery between threads.
+ROMFS File System Module: Implements parsing and reading of a ROMFS-like filesystem image to simulate virtual disk mounting and file exploration.
 
-- **Secure Process Sandbox**  
-  Demonstrates process isolation and inter-process communication using `pipe`, `fork`, and `seccomp` to restrict system calls.
+Custom Memory Allocator: Provides a simple implementation of memalloc and memfree, using a linked-list allocator with coalescence to manage heap memory within the simulator.
 
-## Project Structure
+Cooperative User-Level Scheduler: Simulates user-level cooperative threads using manual context switching, mimicking coroutine behavior and simple thread scheduling.
+
+Memory Protection & Signal Handling: Utilizes the mprotect system call and POSIX signals to emulate memory isolation and error recovery between running threads.
+
+Secure Process Sandbox: Demonstrates process isolation and inter-process communication (IPC) using pipe, fork, and seccomp to restrict a child process's access to underlying system calls.
+
+📁 Project Structure
+
 miniOS/
 ├── src/
-│ ├── fs.c / fs.h # ROMFS parser and filesystem utilities
-│ ├── mem.c / mem.h # Memory allocation and deallocation system
-│ ├── threads.c / threads.h # Cooperative threading and scheduler
-│ ├── protect.c / protect.h # Memory protection and signal handling
-│ ├── sandbox.c / sandbox.h # Process sandboxing and IPC
-│ └── main.c # System initialization and integration
-├── include/ # Shared headers
-├── Makefile # Build configuration
-└── README.md # Project documentation
+│ ├── fs.c / fs.h        # ROMFS parser and filesystem utilities
+│ ├── mem.c / mem.h      # Memory allocation and deallocation system
+│ ├── threads.c / threads.h  # Cooperative threading and scheduler
+│ ├── protect.c / protect.h  # Memory protection and signal handling
+│ ├── sandbox.c / sandbox.h  # Process sandboxing and IPC
+│ └── main.c             # System initialization and integration
+└── include/             # Shared header files
 
-## Build and Run
-### Prerequisites
-- GCC compiler  
-- Linux operating system (for `mprotect`, `seccomp`, and signal support)
-- `make` utility
 
-### Compilation
-```bash
+🛠️ Build and Run
+
+Prerequisites
+
+GCC/Clang: C compiler suite.
+
+make utility.
+
+Linux Operating System: Required for essential system calls like mprotect, seccomp, and POSIX signal support.
+
+Compilation
+
 make
+
+
+Execution
+
 ./miniOS
+
+
+Expected Output
+
 [BOOT] Initializing MiniOS...
 [MEM] Heap initialized (16KB)
 [FS] Mounted ROMFS image
