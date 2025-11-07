@@ -21,4 +21,6 @@ struct Allocator{                  //Heap allocator
     char* end;
 };
 
+void* memalloc(size_t size);
+
 #endif /* MEM_H */
