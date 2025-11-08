@@ -30,7 +30,8 @@ struct memblock memblock_object = {     //HEAP global header
 
 const size_t header_size = sizeof(struct memblock);
 const size_t heap_size = sizeof(mem);
-void* memalloc(int size);
+void* memalloc(int requested_size);
 void meminit();
+void coalescence();
 
 #endif /* MEM_H */
