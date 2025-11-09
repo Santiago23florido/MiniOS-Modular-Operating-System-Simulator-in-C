@@ -13,6 +13,7 @@
 
 #define THREADLIMIT (STACKS-1)
 
+__attribute__((aligned(4096)))
 typedef char my_stack_t[STACK_SIZE];
 
 extern my_stack_t stacks[STACKS];

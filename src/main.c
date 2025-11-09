@@ -17,6 +17,7 @@
 #include "../include/terminal.h"
 #include "../include/sandbox.h"
 #include "../include/threads.h"
+#include "../include/protect.h"
 
 int main(){
     meminit();
@@ -26,6 +27,7 @@ int main(){
     init_scheduler();
     producer_init();
     receiver_init();
+    protect_stacks();
     enter_coroutine(schedulerglobal->coroutine);
     return 0;
 }

@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
+#include <sys/mman.h>
+#include <unistd.h>
 #include "../include/coroutines.h"
 #include "../include/threads.h"
 #include "../include/mem.h"
@@ -77,8 +79,9 @@ void scheduler(){
         }
 
         schedulerglobal->current = p;
+        mprotect(stacks[p->id], STACK_SIZE, PROT_READ | PROT_WRITE);
+        mprotect(stacks[THREADLIMIT], STACK_SIZE, PROT_READ | PROT_WRITE);
         p->state = EXECUTING;
-
         if (p->priority > 0) p->priority -= 1;
 
         for (struct thread* t = head_ref; t != NULL; t = t->nxt) {
@@ -107,7 +110,7 @@ void thread_init(coroutine_t coroutine, int priority){
     }
 
     int ct = 1;
-    struct thread* it = head_ref;   // <--- NO memalloc AQUÍ
+    struct thread* it = head_ref;   
     while (it->nxt != NULL){
         it = it->nxt;
         ct++;
